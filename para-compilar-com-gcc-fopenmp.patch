@@ -1,0 +1,74 @@
+diff -Naur PolyBench-ACC_/OpenMP/linear-algebra/kernels/gemm/Makefile.dep PolyBench-ACC/OpenMP/linear-algebra/kernels/gemm/Makefile.dep
+--- PolyBench-ACC_/OpenMP/linear-algebra/kernels/gemm/Makefile.dep	1969-12-31 21:00:00.000000000 -0300
++++ PolyBench-ACC/OpenMP/linear-algebra/kernels/gemm/Makefile.dep	2020-09-25 17:53:46.232243405 -0300
+@@ -0,0 +1,2 @@
++gemm.o: gemm.c ../../../utilities/polybench.h gemm.h
++polybench.o: ../../../utilities/polybench.c
+diff -Naur PolyBench-ACC_/OpenMP/utilities/common.mk PolyBench-ACC/OpenMP/utilities/common.mk
+--- PolyBench-ACC_/OpenMP/utilities/common.mk	2020-09-25 18:01:51.991005145 -0300
++++ PolyBench-ACC/OpenMP/utilities/common.mk	2020-09-25 17:57:44.505112184 -0300
+@@ -1,7 +1,9 @@
+ INCPATHS = -I$(UTIL_DIR)
+ 
+ BENCHMARK = $(shell basename `pwd`)
+-EXE = $(BENCHMARK)_acc
++# position of directory (openmp, openmp-offloading, cuda...)
++BENCHMARK_TYPE = openmp
++EXE = ${BENCHMARK}-${BENCHMARK_TYPE}.exe
+ SRC = $(BENCHMARK).c
+ HEADERS = $(BENCHMARK).h
+ 
+@@ -18,6 +20,7 @@
+ 
+ $(EXE) : $(SRC)
+ 	$(ACC) $(ACCFLAGS) $(CC) $(CFLAGS) $(INCPATHS) $^ -o $@
++	$(CC) $(POLYBENCH_OPTIONS) $(CFLAGS) $(OMP_CONFIG) $(INCPATHS) $^ -o $@
+ 
+ clean :
+ 	-rm -vf __hmpp* -vf $(EXE) *~ 
+@@ -25,6 +28,14 @@
+ veryclean : clean
+ 	-rm -vf $(DEPS)
+ 
++info:
++	@echo "Use:"
++	@echo "make POLYBENCH_OPTIONS=\"-DPOLYBENCH_TIME -DEXTRALARGE_DATASET\" OMP_CONFIG=\"-DOPENMP_SCHEDULE_DYNAMIC -DOPENMP_CHUNK_SIZE=64 -DOPENMP_NUM_THREADS=24\""
++	@echo "make POLYBENCH_OPTIONS=\"-DPOLYBENCH_TIME -DEXTRALARGE_DATASET\" OMP_CONFIG=\"-DOPENMP_SCHEDULE_GUIDED -DOPENMP_CHUNK_SIZE=64 -DOPENMP_NUM_THREADS=24\""
++	@echo "make POLYBENCH_OPTIONS=\"-DPOLYBENCH_TIME -DEXTRALARGE_DATASET\" OMP_CONFIG=\"-DOPENMP_SCHEDULE_RUNTIME -DOPENMP_CHUNK_SIZE=64 -DOPENMP_NUM_THREADS=24\""
++	@echo "use the option -DRUN_ORIG_VERSION to run the sequential version."
++	@echo "TOY_DATASET: 32, MINI_DATASET: 64, TINY_DATASET: 128, SMALL_DATASET: 256, MEDIUM_DATASET: 512, STANDARD_DATASET: 1024, LARGE_DATASET: 2048, EXTRALARGE_DATASET: 4096, HUGE_DATASET: 8192"
++
+ $(DEPS): $(SRC) $(HEADERS)
+ 	$(CC) $(INCPATHS) $(DEP_FLAG) $(SRC) > $(DEPS)
+ 
+diff -Naur PolyBench-ACC_/OpenMP/utilities/options.mk PolyBench-ACC/OpenMP/utilities/options.mk
+--- PolyBench-ACC_/OpenMP/utilities/options.mk	2020-09-25 18:01:51.991005145 -0300
++++ PolyBench-ACC/OpenMP/utilities/options.mk	2020-09-25 17:44:39.495951826 -0300
+@@ -2,7 +2,7 @@
+ ########################################
+ 
+ # Default OpenACC Target is OpenCL
+-TARGET_LANG = OPENCL
++TARGET_LANG = OPENMP
+ 
+ # Uncomment if you want CUDA
+ # TARGET_LANG = CUDA
+@@ -11,10 +11,10 @@
+ ########################################
+ 
+ # Accelerator Compiler
+-ACC = hmpp
++# ACC = hmpp
+ 
+ # Accelerator Compiler flags
+-ACCFLAGS = --codelet-required --openacc-target=$(TARGET_LANG)
++# ACCFLAGS = --codelet-required --openacc-target=$(TARGET_LANG)
+ 
+ # COMPILER OPTIONS -- HOST
+ ########################################
+@@ -23,4 +23,4 @@
+ CC = gcc
+ 
+ # Compiler flags
+-CFLAGS = -O2
++CFLAGS = -O2 -fopenmp
