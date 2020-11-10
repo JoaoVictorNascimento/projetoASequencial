@@ -1,0 +1,30 @@
+exp = schedule-test, execution = 1, benchmark = gemm, size_of_data = MEDIUM_DATASET, schedule = , chunk_size = , num_threads = ,
+version = OMP, num_threads = 0, NI = 512, NJ = 512, NK = 512, ORIG = 0, OMP = 482953444, 
+0.483000
+exp = schedule-test, execution = 2, benchmark = gemm, size_of_data = MEDIUM_DATASET, schedule = , chunk_size = , num_threads = ,
+version = OMP, num_threads = 0, NI = 512, NJ = 512, NK = 512, ORIG = 0, OMP = 477703003, 
+0.477750
+exp = schedule-test, execution = 3, benchmark = gemm, size_of_data = MEDIUM_DATASET, schedule = , chunk_size = , num_threads = ,
+version = OMP, num_threads = 0, NI = 512, NJ = 512, NK = 512, ORIG = 0, OMP = 497644579, 
+0.497691
+exp = schedule-test, execution = 4, benchmark = gemm, size_of_data = MEDIUM_DATASET, schedule = , chunk_size = , num_threads = ,
+version = OMP, num_threads = 0, NI = 512, NJ = 512, NK = 512, ORIG = 0, OMP = 483148842, 
+0.483222
+exp = schedule-test, execution = 5, benchmark = gemm, size_of_data = MEDIUM_DATASET, schedule = , chunk_size = , num_threads = ,
+version = OMP, num_threads = 0, NI = 512, NJ = 512, NK = 512, ORIG = 0, OMP = 488773079, 
+0.488820
+exp = schedule-test, execution = 6, benchmark = gemm, size_of_data = MEDIUM_DATASET, schedule = , chunk_size = , num_threads = ,
+version = OMP, num_threads = 0, NI = 512, NJ = 512, NK = 512, ORIG = 0, OMP = 497932676, 
+0.497977
+exp = schedule-test, execution = 7, benchmark = gemm, size_of_data = MEDIUM_DATASET, schedule = , chunk_size = , num_threads = ,
+version = OMP, num_threads = 0, NI = 512, NJ = 512, NK = 512, ORIG = 0, OMP = 479892580, 
+0.479937
+exp = schedule-test, execution = 8, benchmark = gemm, size_of_data = MEDIUM_DATASET, schedule = , chunk_size = , num_threads = ,
+version = OMP, num_threads = 0, NI = 512, NJ = 512, NK = 512, ORIG = 0, OMP = 471051380, 
+0.471112
+exp = schedule-test, execution = 9, benchmark = gemm, size_of_data = MEDIUM_DATASET, schedule = , chunk_size = , num_threads = ,
+version = OMP, num_threads = 0, NI = 512, NJ = 512, NK = 512, ORIG = 0, OMP = 540113200, 
+0.540161
+exp = schedule-test, execution = 10, benchmark = gemm, size_of_data = MEDIUM_DATASET, schedule = , chunk_size = , num_threads = ,
+version = OMP, num_threads = 0, NI = 512, NJ = 512, NK = 512, ORIG = 0, OMP = 493391127, 
+0.493437

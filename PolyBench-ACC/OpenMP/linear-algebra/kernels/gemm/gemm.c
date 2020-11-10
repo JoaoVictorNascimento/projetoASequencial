@@ -92,10 +92,7 @@ void kernel_gemm(int ni, int nj, int nk,
   }
   HOOKOMP_TIMING_OMP_STOP;
   
-  fprintf(stdout,
-    "version = OMP, num_threads = %d, NI = %d, NJ = %d, "
-    "NK = %d, ",
-    OPENMP_NUM_THREADS, NI, NJ, NK);
+  fprintf(stdout, "version = OMP, num_threads = 0, NI = %d, NJ = %d, NK = %d, ", NI, NJ, NK);
 
   HOOKOMP_PRINT_TIME_RESULTS;
 
